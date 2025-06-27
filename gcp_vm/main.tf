@@ -24,7 +24,20 @@ resource "google_compute_firewall" "ssh" {
   direction = "INGRESS"
   network   = google_compute_network.vpc_network.id
   source_ranges = ["0.0.0.0/0"]
-  target_tags = ["ssh"]  
+  target_tags = ["ssh-server"]  
+}
+
+// Open Http e Https in firewall
+resource "google_compute_firewall" "http" {
+  name = "allow-http-https"
+  allow {
+    protocol = "tcp"
+    ports    = ["80","443"]
+  }
+  direction = "INGRESS"
+  network   = google_compute_network.vpc_network.id
+  source_ranges = ["0.0.0.0/0"]
+  target_tags = ["https-server"]  
 }
 
 // Single VM Instance
@@ -33,6 +46,7 @@ resource "google_compute_instance" "my_instance" {
   machine_type = "e2-micro"
   zone = var.zone
 
+  tags = ["ssh-server", "https-server"] // Necessario para que o firewall funcione corretamente
 
   boot_disk {
     initialize_params {
@@ -40,7 +54,21 @@ resource "google_compute_instance" "my_instance" {
     }
   }
 
-  metadata_startup_script = "sudo apt-get update; sudo apt-get install -yq build-essential python3-pip rsync; pip install fastapi"
+  // Configuração de metadados para o script de inicialização
+  metadata_startup_script = <<-EOF
+    #!/bin/bash
+    apt-get update
+    apt-get install -y nginx
+
+    # Cria o index.html a partir de conteúdo embutido
+    cat <<EOT > /var/www/html/index.html
+${replace(file("${path.module}/files/index.html"), "$", "\\$")}
+EOT
+
+    systemctl enable nginx
+    systemctl restart nginx
+  EOF
+
 
   network_interface {
     subnetwork = google_compute_subnetwork.default.id
