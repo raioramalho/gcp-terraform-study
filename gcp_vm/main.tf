@@ -23,7 +23,7 @@ resource "google_compute_firewall" "ssh" {
   }
   direction = "INGRESS"
   network   = google_compute_network.vpc_network.id
-  source_ranges = ["0.0.0/0"]
+  source_ranges = ["0.0.0.0/0"]
   target_tags = ["ssh"]  
 }
 
