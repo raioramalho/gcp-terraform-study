@@ -59,6 +59,8 @@ resource "google_compute_instance" "my_instance" {
     #!/bin/bash
     apt-get update
     apt-get install -y nginx
+    systemctl enable nginx
+    systemctl start nginx
 
     # Cria o index.html a partir de conteúdo embutido
     cat <<EOT > /var/www/html/index.html
