@@ -16,7 +16,7 @@ resource "kubernetes_deployment" "nginx" {
   }
 
   spec {
-    replicas = 2
+    replicas = 1
     selector {
       match_labels = {
         app = "nginx"
@@ -36,6 +36,17 @@ resource "kubernetes_deployment" "nginx" {
           image = "nginx:1.25"
           port {
             container_port = 80
+          }
+
+          resources {
+            limits = {
+              cpu = "500m"
+              memory = "128Mi"
+            }
+            requests = {
+              cpu    = "250m"
+              memory = "64Mi"
+            }
           }
         }
       }
@@ -73,7 +84,9 @@ data "cloudflare_zones" "domain" {
 
 // Criando registro DNS no Cloudflare
 resource "cloudflare_record" "nginx" {
-  depends_on = [kubernetes_service.nginx]
+
+  // Garante que o serviço do NGINX esteja criado antes de criar o registro DNS
+  depends_on = [kubernetes_service.nginx] 
 
   zone_id = data.cloudflare_zones.domain.zones[0].id
   name    = var.cloudflare_record_name
