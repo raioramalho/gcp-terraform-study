@@ -28,8 +28,8 @@ Repositório de estudos e experimentação com **Terraform + Google Cloud Platfo
 ```
 gcp-terraform-study/
 ├── gcp_vm_nginx/
-├── gcp_container_nginx
-├── gcp_vm_k3s (em-breve)
+├── gcp_container_nginx/
+├── gcp_vm_k3s/ (em-breve)
 └── README.md  ← este arquivo
 ```
 
