@@ -13,6 +13,9 @@ terraform.rc
 terraform.tfvars
 terraform.tfvars.json
 
+*.drawio.bkp
+*.${drawio,drawio.svg,drawio.png}
+
 # Docker
 *.log
 docker-compose.override.yml
