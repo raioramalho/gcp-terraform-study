@@ -15,6 +15,7 @@ terraform.tfvars.json
 
 *.drawio.bkp
 *.${drawio,drawio.svg,drawio.png}
+*.bkp
 
 # Docker
 *.log
