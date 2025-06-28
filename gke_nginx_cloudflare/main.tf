@@ -1,9 +1,11 @@
+// Criando namespace
 resource "kubernetes_namespace" "raiolab" {
   metadata {
     name = "raiolab"
   }
 }
 
+// Criando deployment do NGINX
 resource "kubernetes_deployment" "nginx" {
   metadata {
     name      = "nginx-deployment"
@@ -41,6 +43,7 @@ resource "kubernetes_deployment" "nginx" {
   }
 }
 
+// Criando serviço do NGINX
 resource "kubernetes_service" "nginx" {
   metadata {
     name      = "nginx-service"
@@ -61,12 +64,14 @@ resource "kubernetes_service" "nginx" {
   }
 }
 
+// Configuração do Cloudflare
 data "cloudflare_zones" "domain" {
   filter {
     name = var.cloudflare_zone_name
   }
 }
 
+// Criando registro DNS no Cloudflare
 resource "cloudflare_record" "nginx" {
   depends_on = [kubernetes_service.nginx]
 
