@@ -4,8 +4,10 @@ resource "google_sql_database_instance" "postgres" {
   region = var.region
   database_version = "POSTGRES_15"
 
+  deletion_protection = false
+
   settings {
-    tier = "db-f1-micro"  # Escolha o tipo de máquina conforme necessário    
+    tier = "db-f1-micro"  # Escolha o tipo de máquina conforme necessário   
     
     ip_configuration {
       ipv4_enabled = true
