@@ -25,10 +25,10 @@ jobs:
 
     - name: Build da imagem Docker
       run: |
-        docker build -t us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ github.event.repository.name }}/${{ github.ref_name }}:latest .
+        docker build -t us.gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ github.event.repository.name }}-${{ github.ref_name }}:latest .
       working-directory: ./cloudrun_python_dockerfile
 
     - name: Push da imagem Docker
       run: |
-        docker push us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ github.event.repository.name }}/${{ github.ref_name }}:latest
+        docker push us.gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ github.event.repository.name }}-${{ github.ref_name }}:latest
       working-directory: ./cloudrun_python_dockerfile

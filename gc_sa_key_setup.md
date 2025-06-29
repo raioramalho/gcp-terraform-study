@@ -19,6 +19,10 @@ gcloud projects add-iam-policy-binding estudos-464221 \
 
 gcloud projects add-iam-policy-binding estudos-464221 \
   --member="serviceAccount:github-ci@estudos-464221.iam.gserviceaccount.com" \
+  --role="roles/artifactregistry.reader"
+
+gcloud projects add-iam-policy-binding estudos-464221 \
+  --member="serviceAccount:github-ci@estudos-464221.iam.gserviceaccount.com" \
   --role="roles/run.admin"
 
 gcloud projects add-iam-policy-binding estudos-464221 \
