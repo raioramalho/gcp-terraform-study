@@ -11,6 +11,11 @@ jobs:
     environment: raiosystems
 
     steps:
+
+    - name: Ir para o diretório do repositório
+      run: |
+        cd ${{ github.workspace }}/cloudrun_python_dockerfile
+
     - name: Checkout código
       uses: actions/checkout@v3
 
@@ -21,11 +26,7 @@ jobs:
 
     - name: Configurar Docker para Artifact Registry
       run: |
-        gcloud auth configure-docker
-
-    - name: Ir para o diretório do repositório
-      run: |
-        cd ${{ github.workspace }}/cloudrun_python_dockerfile
+        gcloud auth configure-docker    
 
     - name: Build da imagem Docker
       run: |
