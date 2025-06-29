@@ -24,8 +24,8 @@ jobs:
 
     - name: Build da imagem Docker
       run: |
-        docker build -t us-central1-docker.pkg.dev/SEU-PROJETO/meu-repo/app:latest .
+        docker build -t us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ github.event.repository.name }}/${{ github.ref_name }}:latest .
 
-    - name: Push da imagem
+    - name: Push da imagem Docker
       run: |
-        docker push us-central1-docker.pkg.dev/SEU-PROJETO/meu-repo/app:latest
+        docker push us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ github.event.repository.name }}/${{ github.ref_name }}:latest

@@ -17,6 +17,15 @@ terraform.tfvars.json
 *.${drawio,drawio.svg,drawio.png}
 *.bkp
 
+# Gcp
+*.gcp.tfstate
+*.gcp.tfstate.*
+.gcp/
+.gcp.lock.hcl
+.gcp.tfvars
+.gcp.tfvars.json
+gcp-sa-key.json
+
 # Docker
 *.log
 docker-compose.override.yml
