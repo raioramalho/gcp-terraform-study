@@ -25,7 +25,7 @@ jobs:
 
     - name: Ir para o diretório do repositório
       run: |
-        cd ../../cloudrun_python_dockerfile
+        cd ${{ github.workspace }}/cloudrun_python_dockerfile
 
     - name: Build da imagem Docker
       run: |
