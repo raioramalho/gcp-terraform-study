@@ -30,5 +30,5 @@ app = FastAPI()
 @app.post("/predict")
 def predict(data: dict):
     df = pd.DataFrame([data])
-    pred = model.predict(df)
+    pred = model.predict(df[["idade", "preco"]])
     return {"prediction": pred[0]}

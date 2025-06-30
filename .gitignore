@@ -32,6 +32,10 @@ docker-compose.override.yml
 .env
 .dockerignore
 
+.joblib
+modelo.joblib
+*modelo.joblib
+
 # Python
 __pycache__/
 *.py[cod]
