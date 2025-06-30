@@ -46,5 +46,7 @@ class PredictRequest(BaseModel):
 @app.get("/")
 def predict(request: PredictRequest):
     df = pd.DataFrame([request.dict()])
-    pred = model.predict(df[["idade", "preco"]])
+    
+    teste = pd.DataFrame([[28, 14500]], columns=["idade", "preco"])
+    pred = model.predict(teste[["idade", "preco"]])
     return {"prediction": float(pred[0])}
