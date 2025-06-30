@@ -11,7 +11,7 @@ df.to_csv("processed.csv", index=False)
 
 
 
-X = df[["idade", "salario"]]
+X = df[["idade", "preco"]]
 y = df["comprou"]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y)
