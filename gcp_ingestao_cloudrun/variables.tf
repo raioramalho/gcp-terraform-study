@@ -14,3 +14,8 @@ variable "zone" {
     default     = "us-central1-a"
     type        = string
 }
+
+variable "image_url" {
+    description = "URL da imagem do Docker no Artifact Registry ou Docker Hub"
+    type        = string
+}

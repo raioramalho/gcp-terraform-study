@@ -13,7 +13,7 @@ resource "google_cloud_run_service" "gcp-ingestao" {
   template {
     spec {
       containers {
-        image = "us.gcr.io/${var.project_id}/gcp_terraform_study-main:latest"
+        image = var.image_url // URL da imagem do Docker no Artifact Registry ou Docker Hub
         ports {
           container_port = 80
         }
