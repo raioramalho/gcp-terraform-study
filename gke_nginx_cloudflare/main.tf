@@ -33,7 +33,7 @@ resource "kubernetes_deployment" "nginx" {
       spec {
         container {
           name  = "nginx"
-          image = "nginx:1.25"
+          image = "us.gcr.io/estudos-464221/gcp-terraform-study-main:latest"
           port {
             container_port = 80
           }
