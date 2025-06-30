@@ -5,7 +5,7 @@ from sklearn.metrics import mean_squared_error
 import joblib
 import pandas as pd
 
-df = pd.read_csv("raw.csv")
+df = pd.read_csv("data.csv")
 df["preco"] = df["preco"].fillna(0).astype(float)
 df.to_csv("processed.csv", index=False)
 
