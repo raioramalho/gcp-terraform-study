@@ -6,6 +6,8 @@ from sklearn.metrics import mean_squared_error
 import joblib
 import pandas as pd
 import os
+from fastapi.responses import JSONResponse
+from fastapi import Request
 
 DATA_PATH = "data.csv"
 PROCESSED_PATH = "processed.csv"
@@ -43,10 +45,8 @@ class PredictRequest(BaseModel):
     idade: float
     preco: float
 
-@app.get("/")
-def predict(request: PredictRequest):
+@app.get("/", response_class=JSONResponse)
+async def predict(request: PredictRequest):
     df = pd.DataFrame([request.dict()])
-    
-    teste = pd.DataFrame([[28, 14500]], columns=["idade", "preco"])
-    pred = model.predict(teste[["idade", "preco"]])
-    return {"prediction": float(pred[0])}
+    pred = model.predict(df[["idade", "preco"]])
+    return JSONResponse(content={"prediction": float(pred[0])}, media_type="application/json")
